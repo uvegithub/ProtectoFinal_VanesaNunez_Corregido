@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "1045578059941",
+    "firebase_url": "https://vanesanunezproyectofinal-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "vanesanunezproyectofinal",
+    "storage_bucket": "vanesanunezproyectofinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045578059941:android:7c27f8859bee298a21bd4c",
+        "android_client_info": {
+          "package_name": "VanesaNunez.ProyectoFinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCh5PjBeGV0reKtrDthmszGdUhcSkPW3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045578059941:android:41bb65bb3acf2eba21bd4c",
+        "android_client_info": {
+          "package_name": "com.vanesanunez.practicafinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCh5PjBeGV0reKtrDthmszGdUhcSkPW3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
