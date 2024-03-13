@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toBottomOf="@id/imageView">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textinputedittextuTitulo"
+                    android:id="@+id/textinputedittextTitulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="serif"
@@ -59,7 +59,7 @@
                 app:layout_constraintTop_toBottomOf="@id/textinputlayoutTitulo">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textinputedittextuAutor"
+                    android:id="@+id/textinputedittextAutor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="serif"
@@ -167,12 +167,32 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textinputlayoutPuntos"
+                app:layout_constraintTop_toBottomOf="@id/textinputlayoutSinopsis"
+                app:layout_constraintStart_toStartOf="parent"
+                app:boxBackgroundColor="#C4B7DC"
+                android:hint="Puntos"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginVertical="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:textSize="14sp"
+                    android:id="@+id/textinputedittextPuntos"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Crear"
-                app:layout_constraintTop_toBottomOf="@+id/textinputlayoutSinopsis"
+                app:layout_constraintTop_toBottomOf="@+id/textinputlayoutPuntos"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/button_volver"
                 app:layout_constraintEnd_toEndOf="parent"

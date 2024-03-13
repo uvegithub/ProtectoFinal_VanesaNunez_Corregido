@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">PracticaFinal</string>
+    <string name="app_name">Libreria</string>
+    <array name="spinner_items">
+        <item>Narrativa</item>
+        <item>Poesia</item>
+    </array>
 </resources>

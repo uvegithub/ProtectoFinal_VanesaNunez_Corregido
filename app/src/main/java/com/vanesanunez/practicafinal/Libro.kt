@@ -13,6 +13,7 @@ data class Libro(
     var disponible:String? = null,
     var genero:String? = null,
     var sinopsis:String? = null,
+    var puntos:Int? = null,
     var imagen: String? = null,
     var estado_notificacion:Int? = null,
     var user_notificacion:String? = null,
