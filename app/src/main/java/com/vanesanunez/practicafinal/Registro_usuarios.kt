@@ -43,8 +43,8 @@ class Registro_usuarios : AppCompatActivity(), CoroutineScope {
 
         user_layout=findViewById(R.id.textinputlayoutUsuario)
         contrasena_layout=findViewById(R.id.textinputlayoutContrasena)
-        user_edit2=findViewById(R.id.textinputedittextusuario2)
-        contrasena_edit2=findViewById(R.id.textinputedittextcontrasena2)
+        user_edit2=findViewById(R.id.textinputedittextusuario)
+        contrasena_edit2=findViewById(R.id.textinputedittextcontrasena)
         boton_ingresar=findViewById(R.id.button)
 
         val this_activity = this
@@ -72,6 +72,9 @@ class Registro_usuarios : AppCompatActivity(), CoroutineScope {
             } else if (Utilidades.existeCliente(lista_clientes, user_edit2.text.toString().trim())) {
                 Toast.makeText(applicationContext, "Ese usuario ya existe", Toast.LENGTH_SHORT)
                     .show()
+            } else if (contrasena_edit2.text.toString().trim().length < 6|| !contrasena_edit2.text.toString().contains("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])".toRegex())) {
+                Toast.makeText(applicationContext, "La contrasena debe tener al menos 6 caracteres, un numero, una letra mayuscula y otra minuscula", Toast.LENGTH_SHORT)
+                    .show()
             } else {
 
                 var id_generado: String? = database_ref.child("tienda").child("usuarios").push().key
@@ -96,14 +99,14 @@ class Registro_usuarios : AppCompatActivity(), CoroutineScope {
                     )
 
                     sharedPreferences.edit().putString("usuario","cliente").apply()
-//                    sharedPreferences.edit().putString("login_"+user_edit2.text.toString().trim(),user_edit2.text.toString().trim()).apply()
-//                    sharedPreferences.edit().putString("password_"+user_edit2.text.toString().trim(), contrasena_edit2.text.toString().trim()).apply()
-//                    sharedPreferences.edit().putString("idusuario", id_generado.toString().trim()).apply()
+                    sharedPreferences.edit().putString("login_"+user_edit2.text.toString().trim(),user_edit2.text.toString().trim()).apply()
+                    sharedPreferences.edit().putString("password_"+user_edit2.text.toString().trim(), contrasena_edit2.text.toString().trim()).apply()
+                    sharedPreferences.edit().putString("idusuario", id_generado.toString().trim()).apply()
 
 
 
-//                    val activity = Intent(applicationContext, Ver_cartas::class.java)
-//                    startActivity(activity)
+                    val activity = Intent(applicationContext, VerLibros::class.java)
+                    startActivity(activity)
                 }
 
 

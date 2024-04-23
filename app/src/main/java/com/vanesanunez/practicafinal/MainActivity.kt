@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.content.edit
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.annotations.concurrent.Background
 import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var intento_registro: Intent
 
     private lateinit var sharedPreferences: SharedPreferences
+
+    var fondo=findViewById<View>(R.id.background)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -116,6 +120,7 @@ class MainActivity : AppCompatActivity() {
     fun cambioModo(modo:Int){
         if(modo == 0){
             AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+            fondo.setBackgroundColor(0)
         }else{
             AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
         }

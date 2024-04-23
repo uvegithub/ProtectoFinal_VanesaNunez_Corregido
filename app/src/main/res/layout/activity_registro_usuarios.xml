@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="serif"
             android:textSize="16sp"
-            android:id="@+id/textinputedittextusuario2"/>
+            android:id="@+id/textinputedittextusuario"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,9 +41,32 @@
         android:layout_height="wrap_content"
         android:id="@+id/textinputlayoutContrasena"
         app:layout_constraintTop_toBottomOf="@id/textinputlayoutUsuario"
-        app:layout_constraintBottom_toTopOf="@id/button"
+        app:layout_constraintBottom_toTopOf="@id/textinputlayoutCorreo"
         app:layout_constraintStart_toStartOf="parent"
         android:hint="Contrasena"
+        android:layout_marginHorizontal="50dp"
+        app:boxBackgroundColor="#F3E5F5"
+        app:counterEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:textSize="16sp"
+            android:id="@+id/textinputedittextcontrasena"
+            android:inputType="textPassword"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textinputlayoutCorreo"
+        app:layout_constraintTop_toBottomOf="@id/textinputlayoutContrasena"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textinputlayouttelefono"
+        android:hint="Email"
         android:layout_marginHorizontal="50dp"
         app:boxBackgroundColor="#F3E5F5">
 
@@ -52,7 +75,31 @@
             android:layout_height="wrap_content"
             android:fontFamily="serif"
             android:textSize="16sp"
-            android:id="@+id/textinputedittextcontrasena2"/>
+            android:id="@+id/textinputedittextcorreo"
+            android:inputType="textEmailAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textinputlayouttelefono"
+        app:layout_constraintTop_toBottomOf="@id/textinputlayoutCorreo"
+        app:layout_constraintBottom_toTopOf="@id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="Contrasena"
+        android:layout_marginHorizontal="50dp"
+        app:boxBackgroundColor="#F3E5F5"
+        app:counterEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:textSize="16sp"
+            android:id="@+id/textinputedittexttelefono"
+            android:inputType="number"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 

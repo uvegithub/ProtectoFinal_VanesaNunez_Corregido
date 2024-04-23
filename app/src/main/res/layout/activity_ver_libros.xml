@@ -22,7 +22,8 @@
                 android:src="@drawable/cesta_compra"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="250dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="280dp"
                 />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -34,7 +35,8 @@
                 android:hint="Introduce el nombre que quieres buscar"
                 app:boxBackgroundColor="#C4B7DC"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cesta">
+                app:layout_constraintTop_toBottomOf="@id/cesta"
+                android:layout_marginStart="30dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textinputedittextNombre"
@@ -56,6 +58,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:backgroundTint="#C4B7DC"
                 android:layout_marginBottom="10dp"
+                android:layout_marginStart="30dp"
                 />
 
 
@@ -68,7 +71,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textinputlayoutNombre"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:layout_marginStart="30dp"/>
 
             <Spinner
                 android:layout_width="match_parent"
@@ -79,16 +83,32 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:spinnerMode="dropdown"
                 android:entries="@array/spinner_items"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lista_libros"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_libro"
-                android:id="@+id/lista_cartas"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/filtro">
+                app:layout_constraintTop_toBottomOf="@id/filtro"
+                tools:listitem="@layout/item_libro"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/lista_libros"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/filtro"-->
+<!--                tools:listitem="@layout/item_libro"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:paddingLeft="10dp"-->
+<!--                android:paddingRight="10dp">-->
 
             </androidx.recyclerview.widget.RecyclerView>
 

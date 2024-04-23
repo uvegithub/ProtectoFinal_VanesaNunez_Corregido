@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/accion_ver_libros"
+        android:title="Catalogo"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/accion_crear_libros"
+        android:title="Añadir articulo"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/accion_editar_libros"
+        android:title="Modificar articulo"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/accion_aceptar_compra"
+        android:title="Aceptar compra"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/accion_crear_evento"
+        android:title="Añadir evento"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/accion_ver_eventos"
+        android:title="Eventos"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/accion_ver_grafico"
+        android:title="Gráfico de ventas"
+        app:showAsAction="never"
+        />
+
+</menu>
