@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
     fun cambioModo(modo:Int){
         if(modo == 0){
             AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-            fondo.setBackgroundColor(0)
+            fondo.setBackgroundColor(getResources().getColor(R.color.black))
         }else{
             AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
         }

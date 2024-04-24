@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".LibroCompleto">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/item_miniatura"
         android:layout_width="100dp"
@@ -13,7 +21,8 @@
         android:src="@drawable/portada_libro"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/titulo"
@@ -130,5 +139,21 @@
         app:layout_constraintStart_toEndOf="@id/editar"
         app:layout_constraintTop_toBottomOf="@+id/sinopsis"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/button_volver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        app:layout_constraintTop_toBottomOf="@+id/comprar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="#C4B7DC"
+        />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

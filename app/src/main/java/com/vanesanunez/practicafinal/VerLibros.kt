@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
@@ -40,6 +41,8 @@ class VerLibros : AppCompatActivity() {
     private lateinit var busqueda: EditText
     private lateinit var boton_busqueda: Button
 
+    private lateinit var libro_con_sinopsis: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ver_libros)
@@ -48,6 +51,8 @@ class VerLibros : AppCompatActivity() {
         rol_usuario = sharedPreferences.getString("usuario", "administrador").toString()
 
         imagen_cesta=findViewById(R.id.cesta)
+
+        libro_con_sinopsis.findViewById<TextView>(R.id.leer_sinopsis)
 
         if(rol_usuario=="cliente"){
             imagen_cesta.setVisibility(View.VISIBLE)
@@ -59,6 +64,11 @@ class VerLibros : AppCompatActivity() {
 //            val activity = Intent(applicationContext, Mi_cesta::class.java)
 //            startActivity(activity)
 //        }
+
+        libro_con_sinopsis.setOnClickListener {
+            val activity_completo = Intent(applicationContext, LibroCompleto::class.java)
+            startActivity(activity_completo)
+        }
 
         spinner= findViewById(R.id.filtro)
 
@@ -134,20 +144,20 @@ class VerLibros : AppCompatActivity() {
         return true
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.accion_ver_cartas -> {
-//                val intent = Intent(this, Ver_cartas::class.java)
-//                startActivity(intent)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.accion_ver_libros -> {
+                val intent = Intent(this, VerLibros::class.java)
+                startActivity(intent)
+            }
+            R.id.accion_crear_libro -> {
+                val intent2 = Intent(this, CrearLibro::class.java)
+                startActivity(intent2)
+            }
+//            R.id.accion_editar_libro -> {
+//                val intent3 = Intent(this, EditarLibro::class.java)
+//                startActivity(intent3)
 //            }
-//            R.id.accion_crear_cartas -> {
-//                val intent2 = Intent(this, Crear_carta::class.java)
-//                startActivity(intent2)
-//            }
-////            R.id.accion_editar_cartas -> {
-////                val intent3 = Intent(this, Editar_carta::class.java)
-////                startActivity(intent3)
-////            }
 //            R.id.accion_aceptar_compra -> {
 //                val intent3 = Intent(this, Mi_cesta::class.java)
 //                startActivity(intent3)
@@ -160,7 +170,11 @@ class VerLibros : AppCompatActivity() {
 //                val intent5 = Intent(this, VerEventos::class.java)
 //                startActivity(intent5)
 //            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+//            R.id.accion_ver_grafico -> {
+//                val intent3 = Intent(this, VerGrafico::class.java)
+//                startActivity(intent3)
+//            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

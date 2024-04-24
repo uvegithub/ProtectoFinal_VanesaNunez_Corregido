@@ -166,30 +166,30 @@ class CrearLibro : AppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + job
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//
-//        if(rol_usuario == "administrador"){
-//            menuInflater.inflate(R.menu.menu_admin, menu)
-//        }else{
-//            menuInflater.inflate(R.menu.menu_user, menu)
-//        }
-//        return true
-//    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.accion_ver_cartas -> {
-//                val intent = Intent(this, Ver_cartas::class.java)
-//                startActivity(intent)
+        if(rol_usuario == "administrador"){
+            menuInflater.inflate(R.menu.menu_admin, menu)
+        }else{
+            menuInflater.inflate(R.menu.menu_user, menu)
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.accion_ver_libros -> {
+                val intent = Intent(this, VerLibros::class.java)
+                startActivity(intent)
+            }
+            R.id.accion_crear_libro -> {
+                val intent2 = Intent(this, CrearLibro::class.java)
+                startActivity(intent2)
+            }
+//            R.id.accion_editar_libro -> {
+//                val intent3 = Intent(this, EditarLibro::class.java)
+//                startActivity(intent3)
 //            }
-//            R.id.accion_crear_cartas -> {
-//                val intent2 = Intent(this, Crear_carta::class.java)
-//                startActivity(intent2)
-//            }
-////            R.id.accion_editar_cartas -> {
-////                val intent3 = Intent(this, Editar_carta::class.java)
-////                startActivity(intent3)
-////            }
 //            R.id.accion_aceptar_compra -> {
 //                val intent3 = Intent(this, Mi_cesta::class.java)
 //                startActivity(intent3)
@@ -202,7 +202,11 @@ class CrearLibro : AppCompatActivity(), CoroutineScope {
 //                val intent5 = Intent(this, VerEventos::class.java)
 //                startActivity(intent5)
 //            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+//            R.id.accion_ver_grafico -> {
+//                val intent3 = Intent(this, VerGrafico::class.java)
+//                startActivity(intent3)
+//            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

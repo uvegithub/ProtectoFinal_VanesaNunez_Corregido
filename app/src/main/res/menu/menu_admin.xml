@@ -7,12 +7,12 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/accion_crear_libros"
+        android:id="@+id/accion_crear_libro"
         android:title="Añadir articulo"
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/accion_editar_libros"
+        android:id="@+id/accion_editar_libro"
         android:title="Modificar articulo"
         app:showAsAction="never"
         />
@@ -34,7 +34,7 @@
 
     <item
         android:id="@+id/accion_ver_grafico"
-        android:title="Gráfico de ventas"
+        android:title="Libros más vendidos"
         app:showAsAction="never"
         />
 
