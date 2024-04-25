@@ -1,17 +1,25 @@
 package com.vanesanunez.practicafinal
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.provider.Settings
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
@@ -19,12 +27,14 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class LibroCompleto : AppCompatActivity() {
+class LibroCompleto : AppCompatActivity(), CoroutineScope {
 
     private lateinit var rol_usuario: String
 
@@ -82,8 +92,104 @@ class LibroCompleto : AppCompatActivity() {
         bcomprar=findViewById(R.id.comprar)
         beditar=findViewById(R.id.button_volver)
 
-        //seguir como editar_carta
+        lista_libros = Utilidades.obtenerListaLibros(db_ref)
 
+        Glide.with(applicationContext)
+            .load(pojo_libro.imagen)
+            .apply(Utilidades.opcionesGlide(applicationContext))
+            .transition(Utilidades.transicion)
+            .into(imagen)
 
+        if(rol_usuario=="cliente"){
+            imagen_cesta.setVisibility(View.VISIBLE)
+            beditar.setVisibility(View.INVISIBLE)
+            bcomprar.setVisibility(View.VISIBLE)
+        }else{
+            imagen_cesta.setVisibility(View.INVISIBLE)
+            beditar.setVisibility(View.VISIBLE)
+            bcomprar.setVisibility(View.INVISIBLE)
+        }
+
+        //GlobalScope(Dispatchers.IO)
+        var url_imagen_firebase = String()
+        launch {
+            if(url_imagen == null){
+                url_imagen_firebase = pojo_libro.imagen!!
+            }else{
+                val url_imagen_firebase =
+                    Utilidades.guardarImagen(storage_ref, pojo_libro.id!!, url_imagen!!)
+            }
+
+            val androidId =
+                Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        }
+
+        bvolver.setOnClickListener {
+            val activity = Intent(applicationContext, VerLibros::class.java)
+            startActivity(activity)
+        }
+
+        imagen.setOnClickListener {
+            accesoGaleria.launch("image/*")
+        }
     }
+    override fun onDestroy() {
+        job.cancel()
+        super.onDestroy()
+    }
+
+    private val accesoGaleria = registerForActivityResult(ActivityResultContracts.GetContent())
+    {uri: Uri ->
+        if(uri!=null){
+            url_imagen = uri
+            imagen.setImageURI(uri)
+        }
+    }
+    override val coroutineContext: CoroutineContext
+         get() = Dispatchers.IO + job
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        if(rol_usuario == "administrador"){
+            menuInflater.inflate(R.menu.menu_admin, menu)
+        }else{
+            menuInflater.inflate(R.menu.menu_user, menu)
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.accion_ver_libros -> {
+                val intent = Intent(this, VerLibros::class.java)
+                startActivity(intent)
+            }
+            R.id.accion_crear_libro -> {
+                val intent2 = Intent(this, CrearLibro::class.java)
+                startActivity(intent2)
+            }
+//            R.id.accion_editar_libro -> {
+//                val intent3 = Intent(this, EditarLibro::class.java)
+//                startActivity(intent3)
+//            }
+//            R.id.accion_aceptar_compra -> {
+//                val intent3 = Intent(this, Mi_cesta::class.java)
+//                startActivity(intent3)
+//            }
+//            R.id.accion_crear_evento -> {
+//                val intent4 = Intent(this, CrearEvento::class.java)
+//                startActivity(intent4)
+//            }
+//            R.id.accion_ver_eventos -> {
+//                val intent5 = Intent(this, VerEventos::class.java)
+//                startActivity(intent5)
+//            }
+//            R.id.accion_ver_grafico -> {
+//                val intent3 = Intent(this, VerGrafico::class.java)
+//                startActivity(intent3)
+//            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
