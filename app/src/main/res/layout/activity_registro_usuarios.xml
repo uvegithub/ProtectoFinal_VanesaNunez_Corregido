@@ -4,115 +4,138 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registro_usuarios">
+    tools:context=".Registro_usuarios"
+    android:background="#FFEBEE"
+    android:id="@+id/background">
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:id="@+id/logo"
-        app:layout_constraintBottom_toTopOf="@id/textinputlayoutUsuario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/logo" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textinputlayoutUsuario"
-        app:layout_constraintTop_toBottomOf="@id/logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/textinputlayoutContrasena"
-        android:hint="Nombre de usuario"
-        android:layout_marginHorizontal="50dp"
-        app:boxBackgroundColor="#F3E5F5">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:textSize="16sp"
-            android:id="@+id/textinputedittextusuario"/>
+            android:layout_height="match_parent">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/logo"
+                app:layout_constraintBottom_toTopOf="@id/textinputlayoutUsuario"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/logo"
+                android:layout_marginVertical="20dp"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textinputlayoutContrasena"
-        app:layout_constraintTop_toBottomOf="@id/textinputlayoutUsuario"
-        app:layout_constraintBottom_toTopOf="@id/textinputlayoutCorreo"
-        app:layout_constraintStart_toStartOf="parent"
-        android:hint="Contrasena"
-        android:layout_marginHorizontal="50dp"
-        app:boxBackgroundColor="#F3E5F5"
-        app:counterEnabled="true">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textinputlayoutUsuario"
+                app:layout_constraintTop_toBottomOf="@id/logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textinputlayoutContrasena"
+                android:hint="Nombre de usuario"
+                android:layout_marginHorizontal="50dp"
+                app:boxBackgroundColor="#F3E5F5"
+                android:layout_marginBottom="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:textSize="16sp"
-            android:id="@+id/textinputedittextcontrasena"
-            android:inputType="textPassword"
-            />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:textSize="16sp"
+                    android:id="@+id/textinputedittextusuario"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textinputlayoutCorreo"
-        app:layout_constraintTop_toBottomOf="@id/textinputlayoutContrasena"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/textinputlayouttelefono"
-        android:hint="Email"
-        android:layout_marginHorizontal="50dp"
-        app:boxBackgroundColor="#F3E5F5">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textinputlayoutContrasena"
+                app:layout_constraintTop_toBottomOf="@id/textinputlayoutUsuario"
+                app:layout_constraintBottom_toTopOf="@id/textinputlayoutCorreo"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="Contrasena"
+                android:layout_marginHorizontal="50dp"
+                app:boxBackgroundColor="#F3E5F5"
+                app:counterEnabled="true"
+                android:layout_marginBottom="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:textSize="16sp"
-            android:id="@+id/textinputedittextcorreo"
-            android:inputType="textEmailAddress"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:textSize="16sp"
+                    android:id="@+id/textinputedittextcontrasena"
+                    android:inputType="textPassword"
+                    />
 
-    </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textinputlayouttelefono"
-        app:layout_constraintTop_toBottomOf="@id/textinputlayoutCorreo"
-        app:layout_constraintBottom_toTopOf="@id/button"
-        app:layout_constraintStart_toStartOf="parent"
-        android:hint="Contrasena"
-        android:layout_marginHorizontal="50dp"
-        app:boxBackgroundColor="#F3E5F5"
-        app:counterEnabled="true">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textinputlayoutCorreo"
+                app:layout_constraintTop_toBottomOf="@id/textinputlayoutContrasena"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textinputlayouttelefono"
+                android:hint="Email"
+                android:layout_marginHorizontal="50dp"
+                app:boxBackgroundColor="#F3E5F5"
+                android:layout_marginBottom="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:textSize="16sp"
-            android:id="@+id/textinputedittexttelefono"
-            android:inputType="number"
-            />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:textSize="16sp"
+                    android:id="@+id/textinputedittextcorreo"
+                    android:inputType="textEmailAddress"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingresar"
-        app:layout_constraintTop_toBottomOf="@+id/textinputlayoutContrasena"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="#F3E5F5"
-        android:textColor="@color/black"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textinputlayouttelefono"
+                app:layout_constraintTop_toBottomOf="@id/textinputlayoutCorreo"
+                app:layout_constraintBottom_toTopOf="@id/button"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="Telefono"
+                android:layout_marginHorizontal="50dp"
+                app:boxBackgroundColor="#F3E5F5"
+                app:counterEnabled="true"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:textSize="16sp"
+                    android:id="@+id/textinputedittexttelefono"
+                    android:inputType="number"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingresar"
+                app:layout_constraintTop_toBottomOf="@+id/textinputlayoutContrasena"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:backgroundTint="#F3E5F5"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

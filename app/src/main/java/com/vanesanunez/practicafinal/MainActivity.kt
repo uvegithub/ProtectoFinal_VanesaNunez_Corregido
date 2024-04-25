@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.text.style.BackgroundColorSpan
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -32,8 +33,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var intento_registro: Intent
 
     private lateinit var sharedPreferences: SharedPreferences
-
-    var fondo=findViewById<View>(R.id.background)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -118,6 +117,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun cambioModo(modo:Int){
+        var fondo=findViewById<View>(R.id.background)
         if(modo == 0){
             AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
             fondo.setBackgroundColor(getResources().getColor(R.color.black))

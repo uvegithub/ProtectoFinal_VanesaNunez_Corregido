@@ -52,7 +52,7 @@ class VerLibros : AppCompatActivity() {
 
         imagen_cesta=findViewById(R.id.cesta)
 
-        libro_con_sinopsis.findViewById<TextView>(R.id.leer_sinopsis)
+//        libro_con_sinopsis.findViewById<TextView>(R.id.leer_sinopsis)
 
         if(rol_usuario=="cliente"){
             imagen_cesta.setVisibility(View.VISIBLE)
@@ -65,10 +65,11 @@ class VerLibros : AppCompatActivity() {
 //            startActivity(activity)
 //        }
 
-        libro_con_sinopsis.setOnClickListener {
-            val activity_completo = Intent(applicationContext, LibroCompleto::class.java)
-            startActivity(activity_completo)
-        }
+        //esto va en el adaptador
+//        libro_con_sinopsis.setOnClickListener {
+//            val activity_completo = Intent(applicationContext, LibroCompleto::class.java)
+//            startActivity(activity_completo)
+//        }
 
         spinner= findViewById(R.id.filtro)
 
