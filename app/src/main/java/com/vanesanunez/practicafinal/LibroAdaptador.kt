@@ -71,6 +71,7 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
         holder.genero.text = item_actual.genero
         holder.disponibilidad.text = item_actual.disponible
         holder.puntos.text = item_actual.disponible
+        holder.leer_sinopsis.text = "Leer sinopsis"
 
 //        var euro=item_actual.precio
 //        var dolar:Float = euro!!.toFloat() * 1.07f
@@ -108,7 +109,8 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
 //        }
 
         holder.leer_sinopsis.setOnClickListener {
-            val activity = Intent(contexto,LibroCompleto::class.java)
+            val activity = Intent(contexto, LibroCompleto::class.java)
+            activity.putExtra("libros", item_actual)
             contexto.startActivity(activity)
         }
 
@@ -165,7 +167,7 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
     override fun getItemCount(): Int = lista_filtrada.size
 
     class LibroViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val miniatura: ImageView = itemView.findViewById(R.id.item_miniatura)
+        var miniatura: ImageView = itemView.findViewById(R.id.item_miniatura)
         val titulo: TextView = itemView.findViewById(R.id.titulo)
         val autor: TextView = itemView.findViewById(R.id.autor)
         val isbn: TextView = itemView.findViewById(R.id.isbn)

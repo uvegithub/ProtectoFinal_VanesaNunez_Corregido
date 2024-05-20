@@ -55,7 +55,7 @@ class LibroCompleto : AppCompatActivity(), CoroutineScope {
     private lateinit var imagen: ImageView
     private lateinit var beditar: ImageView
     private lateinit var bvolver: Button
-    private lateinit var bcomprar: Button
+    private lateinit var bcomprar: ImageView
 
     private var url_imagen: Uri? = null
 
@@ -90,7 +90,7 @@ class LibroCompleto : AppCompatActivity(), CoroutineScope {
         imagen=findViewById(R.id.item_miniatura)
         beditar=findViewById(R.id.editar)
         bcomprar=findViewById(R.id.comprar)
-        beditar=findViewById(R.id.button_volver)
+        bvolver=findViewById(R.id.button_volver)
 
         lista_libros = Utilidades.obtenerListaLibros(db_ref)
 
@@ -101,11 +101,9 @@ class LibroCompleto : AppCompatActivity(), CoroutineScope {
             .into(imagen)
 
         if(rol_usuario=="cliente"){
-            imagen_cesta.setVisibility(View.VISIBLE)
             beditar.setVisibility(View.INVISIBLE)
             bcomprar.setVisibility(View.VISIBLE)
         }else{
-            imagen_cesta.setVisibility(View.INVISIBLE)
             beditar.setVisibility(View.VISIBLE)
             bcomprar.setVisibility(View.INVISIBLE)
         }
@@ -130,7 +128,9 @@ class LibroCompleto : AppCompatActivity(), CoroutineScope {
         }
 
         imagen.setOnClickListener {
-            accesoGaleria.launch("image/*")
+            //accesoGaleria.launch("image/*")
+            val activity = Intent(this, Primer_capitulo::class.java)
+            startActivity(activity)
         }
     }
     override fun onDestroy() {
