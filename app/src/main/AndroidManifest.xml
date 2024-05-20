@@ -15,6 +15,9 @@
         android:theme="@style/Theme.PracticaFinal"
         tools:targetApi="31">
         <activity
+            android:name=".MiCesta"
+            android:exported="false" />
+        <activity
             android:name=".Primer_capitulo"
             android:exported="false" />
         <activity

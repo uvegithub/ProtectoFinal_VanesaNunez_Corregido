@@ -114,53 +114,57 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
             contexto.startActivity(activity)
         }
 
-//        holder.imagen_comprar.setOnClickListener {
-//            if(holder.disponibilidad.text!="No disponible"){
-////                Log.d("IF", "DISPONIBLE")
-//                holder.disponibilidad.text = "No disponible"
-//
-//                //mostrar_notificacion(contexto)
-//                //    val activity = Intent(contexto,Mi_cesta::class.java)
-//                //   activity.putExtra("carta_comprada", item_actual)
-//                //sharedPreferences.edit().putString("disponibilidad","No disponible").apply()
-//
-//
-//                db_ref = FirebaseDatabase.getInstance().getReference()
-//                storage_ref = FirebaseStorage.getInstance().getReference()
-//
-//                var id_generado: String? = db_ref.child("libreria").child("libros_comprados").push().key
-//
-//
-//                var id_carta = item_actual.id
-//                var id_usuario = sharedPreferences.getString("idusuario", "1").toString()
-//                Log.d("HOLAAAA", id_usuario.toString())
-//                var estado = "Pendiente"
-//
-//
-//                sharedPreferences.edit().putString("id_carta_reservada", id_generado).apply()
-//                sharedPreferences.edit().putString("id_carta", id_carta).apply()
-//                val androidId =
-//                    Settings.Secure.getString(contexto.contentResolver, Settings.Secure.ANDROID_ID)
-//
-//                GlobalScope.launch(Dispatchers.IO) {
-////                    val url_carta_firebase =
-////                        Utilidades.guardarImagenReservada(storage_ref, id_generado!!, url_carta!!)
-//
-//                    Utilidades.escribirCartaReservada(
-//                        db_ref, id_generado!!,
-//                        id_carta!!,
-//                        id_usuario,
-//                        estado,
-//                        Estado.CREADO,
-//                        androidId)
-//                }
-//
-//
-//            }else{
-//                Log.d("ELSE", "NO DISPONIBLE")
-//            }
-//
-//        }
+        holder.imagen_comprar.setOnClickListener {
+            if(holder.disponibilidad.text!="No disponible"){
+//                Log.d("IF", "DISPONIBLE")
+                holder.disponibilidad.text = "No disponible"
+
+                //mostrar_notificacion(contexto)
+                //    val activity = Intent(contexto,Mi_cesta::class.java)
+                //   activity.putExtra("carta_comprada", item_actual)
+                //sharedPreferences.edit().putString("disponibilidad","No disponible").apply()
+
+
+                db_ref = FirebaseDatabase.getInstance().getReference()
+                storage_ref = FirebaseStorage.getInstance().getReference()
+
+                var id_generado: String? = db_ref.child("libreria").child("libros_comprados").push().key
+
+
+                var id_libro = sharedPreferences.getString("id_libro", "1").toString()
+                var id_usuario = sharedPreferences.getString("idusuario", "1").toString()
+                //Log.d("HOLAAAA", id_usuario.toString())
+                var estado = "Pendiente"
+                var puntos = sharedPreferences.getString("estrellas", "1").toString()
+
+
+                sharedPreferences.edit().putString("id_libro_reservado", id_generado.toString().trim()).apply()
+
+                val androidId =
+                    Settings.Secure.getString(contexto.contentResolver, Settings.Secure.ANDROID_ID)
+
+                GlobalScope.launch(Dispatchers.IO) {
+                    val url_carta_firebase =
+                        Utilidades.guardarImagenReservada(storage_ref, id_generado!!, url_carta!!)
+
+                    Utilidades.escribirLibroReservado(
+                        db_ref, id_generado!!,
+                        id_libro!!,
+                        id_usuario,
+                        estado,
+                        puntos.trim().toInt(),
+                        Estado.CREADO,
+                        androidId,
+                        url_carta_firebase
+                    )
+                }
+
+
+            }else{
+                Log.d("ELSE", "NO DISPONIBLE")
+            }
+
+        }
 
     }
 
@@ -208,25 +212,25 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
         }
     }
 
-//    fun mostrar_notificacion(contexto: Context){
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-//            canalId += 1
-//            var canalNombre = "canal" + canalId.toString()
-//            val notificationChannel = NotificationChannel(canalId.toString(), canalNombre, NotificationManager.IMPORTANCE_DEFAULT)
-//            contexto.getSystemService<NotificationManager>()?.createNotificationChannel(notificationChannel)
-//        }
-//
-//        val intento_boton = Intent(contexto, Mi_cesta::class.java)
-//        val pendingIntent_boton = PendingIntent.getActivity(contexto, 0, intento_boton, PendingIntent.FLAG_UPDATE_CURRENT)
-//
-//        val builder = NotificationCompat.Builder(contexto, canalId.toString())
-//            .setSmallIcon(R.drawable.notification_icon_124899)
-//            .setContentTitle("Notificacion")
-//            .setContentText("Has comprado la carta. Mi id es "+canalId)
-//            .addAction(R.drawable.notification_icon_124899,"Ir a mi cesta", pendingIntent_boton)
-//
-//        with(contexto.getSystemService<NotificationManager>()){
-//            this?.notify(1,builder.build())
-//        }
-//    }
+    fun mostrar_notificacion(contexto: Context){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            canalId += 1
+            var canalNombre = "canal" + canalId.toString()
+            val notificationChannel = NotificationChannel(canalId.toString(), canalNombre, NotificationManager.IMPORTANCE_DEFAULT)
+            contexto.getSystemService<NotificationManager>()?.createNotificationChannel(notificationChannel)
+        }
+
+        val intento_boton = Intent(contexto, MiCesta::class.java)
+        val pendingIntent_boton = PendingIntent.getActivity(contexto, 0, intento_boton, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val builder = NotificationCompat.Builder(contexto, canalId.toString())
+            .setSmallIcon(R.drawable.notification_icon_124899)
+            .setContentTitle("Notificacion")
+            .setContentText("Has comprado el libro. Mi id es "+canalId)
+            .addAction(R.drawable.notification_icon_124899,"Ir a mi cesta", pendingIntent_boton)
+
+        with(contexto.getSystemService<NotificationManager>()){
+            this?.notify(1,builder.build())
+        }
+    }
 }

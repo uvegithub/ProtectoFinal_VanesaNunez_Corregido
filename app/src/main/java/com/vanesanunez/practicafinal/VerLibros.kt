@@ -60,10 +60,10 @@ class VerLibros : AppCompatActivity() {
             imagen_cesta.setVisibility(View.INVISIBLE)
         }
 
-//        imagen_cesta.setOnClickListener {
-//            val activity = Intent(applicationContext, Mi_cesta::class.java)
-//            startActivity(activity)
-//        }
+        imagen_cesta.setOnClickListener {
+            val activity = Intent(applicationContext, MiCesta::class.java)
+            startActivity(activity)
+        }
 
         //esto va en el adaptador
 //        libro_con_sinopsis.setOnClickListener {

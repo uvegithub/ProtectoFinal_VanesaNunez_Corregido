@@ -61,8 +61,8 @@ class CrearLibro : AppCompatActivity(), CoroutineScope {
         autor=findViewById(R.id.textinputedittextAutor)
         isbn=findViewById(R.id.textinputedittextIBNS)
         precio=findViewById(R.id.textinputedittextPrecio)
-        disponibilidad=findViewById(R.id.textinputedittextDisponibilidad)
         genero=findViewById(R.id.textinputedittextGenero)
+        disponibilidad=findViewById(R.id.textinputedittextDisponibilidad)
         sinopsis=findViewById(R.id.textinputedittextSinopsis)
         puntos=findViewById(R.id.textinputedittextPuntos)
         bcrear=findViewById(R.id.button)
@@ -83,8 +83,8 @@ class CrearLibro : AppCompatActivity(), CoroutineScope {
                 autor.text.toString().trim().isEmpty() ||
                 isbn.text.toString().trim().isEmpty() ||
                 precio.text.toString().trim().isEmpty() ||
-                disponibilidad.text.toString().trim().isEmpty() ||
-                genero.text.toString().trim().isEmpty()
+                genero.text.toString().trim().isEmpty() ||
+                disponibilidad.text.toString().trim().isEmpty()
             ) {
                 Toast.makeText(
                     applicationContext, "Faltan datos en el " +
@@ -102,6 +102,8 @@ class CrearLibro : AppCompatActivity(), CoroutineScope {
             } else {
 
                 var id_generado: String? = database_ref.child("libreria").child("libros").push().key
+                sharedPreferences.edit().putString("id_libro", id_generado.toString().trim()).apply()
+                sharedPreferences.edit().putString("estrellas", puntos.toString()).apply()
 
                 //GlobalScope(Dispatchers.IO)
                 launch {
@@ -117,8 +119,8 @@ class CrearLibro : AppCompatActivity(), CoroutineScope {
                         autor.text.toString().trim(),
                         isbn.text.toString().trim(),
                         precio.text.toString().trim().toFloat(),
-                        disponibilidad.text.toString().trim(),
                         genero.text.toString().trim(),
+                        disponibilidad.text.toString().trim(),
                         sinopsis.text.toString().trim(),
                         puntos.text.toString().trim().toInt(),
                         url_carta_firebase,
