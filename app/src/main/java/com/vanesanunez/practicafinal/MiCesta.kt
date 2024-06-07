@@ -154,17 +154,17 @@ class MiCesta : AppCompatActivity() {
 //                startActivity(intent3)
 //            }
 //            R.id.accion_aceptar_compra -> {
-//                val intent3 = Intent(this, Mi_cesta::class.java)
-//                startActivity(intent3)
-//            }
-//            R.id.accion_crear_evento -> {
-//                val intent4 = Intent(this, CrearEvento::class.java)
+//                val intent4 = Intent(this, MiCesta::class.java)
 //                startActivity(intent4)
 //            }
-//            R.id.accion_ver_eventos -> {
-//                val intent5 = Intent(this, VerEventos::class.java)
-//                startActivity(intent5)
-//            }
+            R.id.accion_crear_evento -> {
+                val intent3 = Intent(this, CrearEvento::class.java)
+                startActivity(intent3)
+            }
+            R.id.accion_ver_eventos -> {
+                val intent4 = Intent(this, VerEvento::class.java)
+                startActivity(intent4)
+            }
 //            R.id.accion_ver_grafico -> {
 //                val intent3 = Intent(this, VerGrafico::class.java)
 //                startActivity(intent3)

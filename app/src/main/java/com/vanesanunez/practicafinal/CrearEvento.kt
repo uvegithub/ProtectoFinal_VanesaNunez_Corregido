@@ -2,7 +2,6 @@ package com.vanesanunez.practicafinal
 
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -10,9 +9,7 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -24,32 +21,28 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class CrearLibro : AppCompatActivity(), CoroutineScope {
+class CrearEvento : AppCompatActivity(), CoroutineScope {
 
-    private lateinit var titulo: TextInputEditText
-    private lateinit var autor: TextInputEditText
-    private lateinit var isbn: TextInputEditText
+    private lateinit var nombre: TextInputEditText
     private lateinit var precio: TextInputEditText
-    private lateinit var disponibilidad: TextInputEditText
-    private lateinit var genero: TextInputEditText
-    private lateinit var puntos: TextInputEditText
-    private lateinit var sinopsis: TextInputEditText
-    private lateinit var imagen: ImageView
+    private lateinit var aforoMax: TextInputEditText
+    private lateinit var aforoOcu: TextInputEditText
     private lateinit var bcrear: Button
     private lateinit var bvolver: Button
 
-    private var url_libro: Uri? = null
+    //    private var url_carta: Uri? = null
     private lateinit var database_ref: DatabaseReference
     private lateinit var storage_ref: StorageReference
-    private lateinit var lista_libros: MutableList<Libro>
+    private lateinit var lista_eventos: MutableList<Evento>
 
     private lateinit var job: Job
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var rol_usuario: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_crear_libro)
+        setContentView(R.layout.activity_crear_evento)
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         rol_usuario = sharedPreferences.getString("usuario", "administrador").toString()
@@ -57,83 +50,70 @@ class CrearLibro : AppCompatActivity(), CoroutineScope {
         val this_activity = this
         job = Job()
 
-        titulo=findViewById(R.id.textinputedittextTitulo)
-        autor=findViewById(R.id.textinputedittextAutor)
-        isbn=findViewById(R.id.textinputedittextIBNS)
-        precio=findViewById(R.id.textinputedittextPrecio)
-        genero=findViewById(R.id.textinputedittextGenero)
-        disponibilidad=findViewById(R.id.textinputedittextDisponibilidad)
-        sinopsis=findViewById(R.id.textinputedittextSinopsis)
-        puntos=findViewById(R.id.textinputedittextPuntos)
-        bcrear=findViewById(R.id.button)
-        bvolver=findViewById(R.id.button_volver)
-        imagen=findViewById(R.id.imageView)
+        nombre=findViewById(R.id.textinputedittextNombreE)
+        precio=findViewById(R.id.textinputedittextPrecioE)
+        aforoMax=findViewById(R.id.textinputedittextAforoMaxE)
+        aforoOcu=findViewById(R.id.textinputedittextAforoOcuE)
+        bcrear=findViewById(R.id.buttonE)
+        bvolver=findViewById(R.id.button_volverE)
 
         database_ref = FirebaseDatabase.getInstance().getReference()
         storage_ref = FirebaseStorage.getInstance().getReference()
-        lista_libros = Utilidades.obtenerListaLibros(database_ref)
-
+        lista_eventos = Utilidades.obtenerListaEventos(database_ref)
 
         bcrear.setOnClickListener {
 
 //            val dateTime = LocalDateTime.now()
 //                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
-            if (titulo.text.toString().trim().isEmpty() ||
-                autor.text.toString().trim().isEmpty() ||
-                isbn.text.toString().trim().isEmpty() ||
+            if (nombre.text.toString().trim().isEmpty() ||
                 precio.text.toString().trim().isEmpty() ||
-                genero.text.toString().trim().isEmpty() ||
-                disponibilidad.text.toString().trim().isEmpty()
+                aforoMax.text.toString().trim().isEmpty() ||
+                aforoOcu.text.toString().trim().isEmpty()
             ) {
                 Toast.makeText(
                     applicationContext, "Faltan datos en el " +
                             "formulario", Toast.LENGTH_SHORT
                 ).show()
 
-            } else if (url_libro == null) {
-                Toast.makeText(
-                    applicationContext, "Falta seleccionar la " +
-                            "portada", Toast.LENGTH_SHORT
-                ).show()
-            } else if (Utilidades.existeLibro(lista_libros, titulo.text.toString().trim())) {
-                Toast.makeText(applicationContext, "Ese libro ya existe", Toast.LENGTH_SHORT)
+//            } else if (url_carta == null) {
+//                Toast.makeText(
+//                    applicationContext, "Falta seleccionar el " +
+//                            "escudo", Toast.LENGTH_SHORT
+//                ).show()
+            } else if (Utilidades.existeEvento(lista_eventos, nombre.text.toString().trim())) {
+                Toast.makeText(applicationContext, "Ese evento ya existe", Toast.LENGTH_SHORT)
                     .show()
             } else {
 
-                var id_generado: String? = database_ref.child("libreria").child("libros").push().key
-                sharedPreferences.edit().putString("id_libro", id_generado.toString().trim()).apply()
-                sharedPreferences.edit().putString("estrellas", puntos.toString()).apply()
+                var id_generado: String? = database_ref.child("libreria").child("eventos").push().key
+//                sharedPreferences.edit().putString("id_evento", id_generado.toString().trim()).apply()
 
                 //GlobalScope(Dispatchers.IO)
                 launch {
-                    val url_carta_firebase =
-                        Utilidades.guardarImagen(storage_ref, id_generado!!, url_libro!!)
+//                    val url_carta_firebase =
+//                        Utilidades.guardarImagen(storage_ref, id_generado!!, url_carta!!)
 
                     val androidId =
                         Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-                    Utilidades.escribirLibro(
+                    Utilidades.escribirEvento(
                         database_ref, id_generado!!,
-                        titulo.text.toString().trim(),
-                        autor.text.toString().trim(),
-                        isbn.text.toString().trim(),
+                        nombre.text.toString().trim(),
                         precio.text.toString().trim().toFloat(),
-                        genero.text.toString().trim(),
-                        disponibilidad.text.toString().trim(),
-                        sinopsis.text.toString().trim(),
-                        puntos.text.toString().trim().toInt(),
-                        url_carta_firebase,
+                        aforoMax.text.toString().trim().toInt(),
+                        aforoOcu.text.toString().trim().toInt(),
+//                        url_carta_firebase,
                         Estado.CREADO,
                         androidId)
 
                     Utilidades.tostadaCorrutina(
                         this_activity,
                         applicationContext,
-                        "Libro creado con exito"
+                        "Evento creado con exito"
                     )
 
-//                    sharedPreferences.edit().putString("id_libro", id_generado.toString().trim()).apply()
+                    sharedPreferences.edit().putString("id_evento", id_generado.toString().trim()).apply()
 
                     val activity = Intent(applicationContext, VerLibros::class.java)
                     startActivity(activity)
@@ -147,10 +127,10 @@ class CrearLibro : AppCompatActivity(), CoroutineScope {
             startActivity(activity)
         }
 
-        imagen.setOnClickListener {
-            accesoGaleria.launch("image/*")
-
-        }
+//        imagen.setOnClickListener {
+//            accesoGaleria.launch("image/*")
+//
+//        }
     }
 
     override fun onDestroy() {
@@ -158,13 +138,13 @@ class CrearLibro : AppCompatActivity(), CoroutineScope {
         super.onDestroy()
     }
 
-    private val accesoGaleria = registerForActivityResult(ActivityResultContracts.GetContent())
-    { uri: Uri ->
-        if (uri != null) {
-            url_libro = uri
-            imagen.setImageURI(uri)
-        }
-    }
+    //    private val accesoGaleria = registerForActivityResult(ActivityResultContracts.GetContent())
+//    { uri: Uri ->
+//        if (uri != null) {
+//            url_carta = uri
+//            imagen.setImageURI(uri)
+//        }
+//    }
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + job
 
@@ -177,7 +157,6 @@ class CrearLibro : AppCompatActivity(), CoroutineScope {
         }
         return true
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.accion_ver_libros -> {

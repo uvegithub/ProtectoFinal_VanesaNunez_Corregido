@@ -44,7 +44,7 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
 
     private lateinit var db_ref: DatabaseReference
     private lateinit var storage_ref: StorageReference
-    private var url_carta: Uri? = null
+    private var url_libro: Uri? = null
     private lateinit var job: Job
 
     override fun onCreateViewHolder(
@@ -73,12 +73,12 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
         holder.puntos.text = item_actual.disponible
         holder.leer_sinopsis.text = "Leer sinopsis"
 
-//        var euro=item_actual.precio
-//        var dolar:Float = euro!!.toFloat() * 1.07f
+        var euro=item_actual.precio
+        var dolar:Float = euro!!.toFloat() * 1.07f
 
-//        if(holder.dolares.isChecked){
-//            holder.precio.text = dolar.toString()
-//        }
+        if(holder.dolares.isChecked){
+            holder.precio.text = dolar.toString()
+        }
 
         val URL:String? = when(item_actual.imagen){
             ""-> null
@@ -102,11 +102,11 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
             holder.editar.setVisibility(View.VISIBLE)
         }
 
-//        holder.editar.setOnClickListener {
-//            val activity = Intent(contexto,EditarLibro::class.java)
-//            activity.putExtra("cartas", item_actual)
-//            contexto.startActivity(activity)
-//        }
+        holder.editar.setOnClickListener {
+            val activity = Intent(contexto,EditarLibro::class.java)
+            activity.putExtra("libros", item_actual)
+            contexto.startActivity(activity)
+        }
 
         holder.leer_sinopsis.setOnClickListener {
             val activity = Intent(contexto, LibroCompleto::class.java)
@@ -116,13 +116,13 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
 
         holder.imagen_comprar.setOnClickListener {
             if(holder.disponibilidad.text!="No disponible"){
-//                Log.d("IF", "DISPONIBLE")
+                Log.d("IF", "DISPONIBLE")
                 holder.disponibilidad.text = "No disponible"
 
-                //mostrar_notificacion(contexto)
-                //    val activity = Intent(contexto,Mi_cesta::class.java)
-                //   activity.putExtra("carta_comprada", item_actual)
-                //sharedPreferences.edit().putString("disponibilidad","No disponible").apply()
+                mostrar_notificacion(contexto)
+                    val activity = Intent(contexto,MiCesta::class.java)
+                   activity.putExtra("libro_comprado", item_actual)
+                sharedPreferences.edit().putString("disponibilidad","No disponible").apply()
 
 
                 db_ref = FirebaseDatabase.getInstance().getReference()
@@ -144,8 +144,8 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
                     Settings.Secure.getString(contexto.contentResolver, Settings.Secure.ANDROID_ID)
 
                 GlobalScope.launch(Dispatchers.IO) {
-                    val url_carta_firebase =
-                        Utilidades.guardarImagenReservada(storage_ref, id_generado!!, url_carta!!)
+                    val url_libro_firebase =
+                        Utilidades.guardarImagenReservada(storage_ref, id_generado!!, url_libro!!)
 
                     Utilidades.escribirLibroReservado(
                         db_ref, id_generado!!,
@@ -155,10 +155,9 @@ class LibroAdaptador (var lista_libros: MutableList<Libro>):
                         puntos.trim().toInt(),
                         Estado.CREADO,
                         androidId,
-                        url_carta_firebase
+                        url_libro_firebase
                     )
                 }
-
 
             }else{
                 Log.d("ELSE", "NO DISPONIBLE")
